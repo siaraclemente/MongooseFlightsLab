@@ -86,15 +86,17 @@
         </form>
         <tbody>
             <ul>
-                <% if (tickets.length === 0) { %>
+                <% if (tickets.length) { %>
                 <% tickets.forEach(function(t) { %>
                     <li>
                         <td><%= t.seat %></td>
                         <td><%= t.flight %></td>
                         <td><%= t.price %></td>
                     </li>
-                <% }); %>
+                    <% } else { %>
+                    <h5>No Tickets for This Flight Yet</h5>
                 <% } %>
+                <% }); %>
             </ul>
         </tbody>
     
