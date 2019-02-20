@@ -33,8 +33,14 @@ var flightSchema = new Schema({
             type: String,
             enum: ['AUS', 'DAL', 'LAX', 'SEA'],
             default: 'SEA'
-        },  
-        destinations: [{type: destinationSchema}]
+        }, 
+    
+ destinations: [destinationSchema],
+
+ tickets: [{
+   type: Schema.Types.ObjectId, 
+   ref: 'Ticket'
+  }]         
 });
 
 // Compile the schema into a model and export it

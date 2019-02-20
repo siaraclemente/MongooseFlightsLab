@@ -5,72 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <title>List of Flights</title>
+    <title>Add New Flight</title>
 </head>
-<body> 
-    <ul class= 'nav'>
+<body>
+      <ul class= 'nav'>
         <li><a href='/flights'>Your Flights</a></li> 
         <li><a href='/flights/new'>Schedule A New Flight</a></li>
-    </ul>
-    <h1>Flight Details</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Airport</th>
-                    <th>Airline</th>
-                    <th>Flight Number</th>
-                    <th>Departs</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <td><%= flight.airport %></td>
-                        <td><%= flight.airline %></td>
-                        <td><%= flight.flightNo %></td>
-                        <td><%= flight.departs %></td>
-                    </tr>
-            </tbody>
-        </table>
-        <form action="/flights/<%= flight._id%>/destinations" method="POST">
-        <table>
-            <thead>
-                <tr>
-                    <th><h4>Destination</h4></th> 
-                    <th><h4>Arrival</h4></th>
-                </tr>
-            </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <select name="airport">
-                                <option value="AUS">AUS</option>
-                                <option value="DAL">DAL</option>
-                                <option value="LAX">LAX</option>
-                                <option value="SEA">SEA</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="date" name="arrival">
-                        </td>
-                    </tr>
-                </tbody>    
-        </table>
-        <td>
-            <input type="submit" value="Save Destination">
-        </td>
-
-        </form>
-        <tbody>
+      </ul>
+      <h1>Flight Details</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Airport</th>
+                  <th>Airline</th>
+                  <th>Flight Number</th>
+                  <th>Departs</th>
+                  <span>
+                  </span>
+              </tr>
+          </thead>
+          <tbody>
+                  <tr>
+                      <td><%= flight.airport %></td>
+                      <td><%= flight.airline %></td>
+                      <td><%= flight.flightNo %></td>
+                      <td><%= flight.departs %></td>
+                  </tr>
+          </tbody>
+      </table>
+      <form action="/flights/<%= flight._id%>/destinations" method="POST">
+          <table>
+              <thead>
+                  <tr>
+                      <th><h4>Destination</h4></th>
+                      <th><h4>Arrival</h4></th>
+                  </tr>
+              </thead>
+                  <tbody>
+                      <tr>
+                          <td>
+                              <select name="airport">
+                                  <option value="AUS">AUS</option>
+                                  <option value="DAL">DAL</option>
+                                  <option value="LAX">LAX</option>
+                                  <option value="SEA">SEA</option>
+                              </select>
+                          </td>
+                          <td>
+                              <input type="date" name="arrival">
+                          </td>
+                      </tr>
+                  </tbody>
+          </table>
+          <td>
+              <input type="submit" value="Save Destination">
+          </td>
+          </form>
+          <tbody>
             <ul>
                 <% flight.destinations.forEach(function(f) { %>
-                <li>    
-                    <td><%= f.airport %></td>
-                    <td><%= f.arrival %></td>
-                </li>
+                    <li>
+                        <td><%= f.airport %></td>
+                        <td><%= f.arrival %></td>
+                    </li>
                 <% }); %>
             </ul>
         </tbody>
-
-
-    </body>
+        <h1>Tickets</h1>
+        <form action="/flights/<%= flight._id %>/tickets" method="POST">
+          <label>Seats:
+                <input name="seat" pattern="[A-F][1-9]\d?">
+          </label><br>
+          <label>Flight Number:
+            <input type="number" name="flight">
+          </label><br>
+            <label>Price:
+            <input type="number" name="price">
+            </label><br>
+            <input type="submit" value="Get Tickets">
+        </form>
+        <tbody>
+            <ul>
+                <% if (tickets.length === 0) { %>
+                <% tickets.forEach(function(t) { %>
+                    <li>
+                        <td><%= t.seat %></td>
+                        <td><%= t.flight %></td>
+                        <td><%= t.price %></td>
+                    </li>
+                <% }); %>
+                <% } %>
+            </ul>
+        </tbody>
+    
+</body>
 </html>

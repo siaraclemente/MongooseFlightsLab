@@ -4,16 +4,11 @@ var Flight = require('../models/flight');
    create
  };
 
- function create (req,res){
-    Flight.findById(req.params.id, function(err, flight){
-        console.log(req.body);
-        flight.destinations.push(req.body);
-        flight.save(function(err, flight){
-            if(err){
-                console.log(err)
-            } else{
-                res.redirect('/flights/' +flight._id)
-            }
-        })
+ function create(req, res) {
+    Flight.findById(req.params.id, function(err, flight) {
+      flight.destinations.push(req.body);
+      flight.save(function(err) {
+        res.redirect(`/flights/${flight._id}`);
+      });
     });
- }
+  }
